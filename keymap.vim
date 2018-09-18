@@ -33,6 +33,11 @@ let g:which_key_map.g = {
       \ 'p' : ['Git push'               , 'fugitive-push']              ,
       \ 'y' : ['Goyo'                   , 'goyo-mode']                  ,
       \ }
+" == Search ==============================================================
+let g:which_key_map.s = {
+        \ 'name' : '+search' ,
+        \ 'r' : ['OverCommandLine' , 'find-replace'] ,
+        \ }
 
 " == Window ==============================================================
 let g:which_key_map.w = {
