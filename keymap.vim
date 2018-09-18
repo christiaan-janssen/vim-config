@@ -56,6 +56,11 @@ let g:which_key_map.w = {
       \ '?' : ['Windows'    , 'fzf-window']            ,
       \ }
 
+" == TabMan =========================================================
+let g:which_key_map.t = {
+        \ 'name' : '+tabs' ,
+        \ 't' : ['TMToggle' , 'tabs'] ,
+        \ }
 
 call which_key#register('<Space>', "g:which_key_map")
 

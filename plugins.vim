@@ -14,6 +14,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/unite.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'kien/tabman.vim'
 
 " deoplete ----------------------------------------------------------
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
