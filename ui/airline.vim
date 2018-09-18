@@ -1,7 +1,7 @@
 
 " Airline -----------------------------------------------------------
 
-let g:airline_theme='violet'
+let g:airline_theme='gruvbox'
 let g:Powerline_symbols='fancy'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled=1

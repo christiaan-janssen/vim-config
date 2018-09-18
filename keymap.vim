@@ -1,76 +1,65 @@
-let mapleader=" "      " leader is comma
-
-" vim-fugitive {
-  nnoremap <silent> <Leader>gs :Gstatus<CR>
-  nnoremap <silent> <Leader>gd :Gdiff<CR>
-  nnoremap <silent> <Leader>gc :Gcommit<CR>
-  nnoremap <silent> <Leader>gb :Gblame<CR>
-  nnoremap <silent> <Leader>gl :Glog<CR>
-  nnoremap <silent> <Leader>gp :Git push<CR>
-  nnoremap <silent> <Leader>gr :Gread<CR>
-  nnoremap <silent> <Leader>gw :Gwrite<CR>
-  nnoremap <silent> <Leader>ge :Gedit<CR>
-  " Mnemonic _i_nteractive
-  nnoremap <silent> <Leader>gi :Git add -p %<CR>
-"}" Define prefix dictionary
-
-let g:lmap =  {}
-
-" Second level dictionaries:
-let g:lmap.f = { 'name' : 'File Menu' }
-let g:lmap.o = { 'name' : 'Open Stuff' }
-" 'name' is a special field. It will define the name of the group.
-" leader-f is the "File Menu" group.
-" Unnamed groups will show a default string
-
-" Provide commands and descriptions for existing mappings
-	nmap <silent> <leader>fd :e $MYVIMRC<CR>
-	let g:lmap.f.d = ['e $MYVIMRC', 'Open vimrc']
-
-	nmap <silent> <leader>fs :so %<CR>
-	" let g:lmap.f.s = ['so %', 'Source file']
-
-	nmap <silent> <leader>oo  :copen<CR>
-" let g:lmap.o.o = ['copen', 'Open quickfix']
-
-	nmap <silent> <leader>ol  :lopen<CR>
-	" let g:lmap.o.l = ['lopen', 'Open locationlist']
-
-	nmap <silent> <leader>fw :w<CR>
-	" let g:lmap.f.w = ['w', 'Write file']
-
-" Create new menus not based on existing mappings:
-let g:lmap.g = {
-				\'name' : 'Git Menu',
-				\'s' : ['Gstatus', 'Git Status'],
-                \'p' : ['Gpull',   'Git Pull'],
-                \'u' : ['Gpush',   'Git Push'],
-                \'c' : ['Gcommit', 'Git Commit'],
-                \'w' : ['Gwrite',  'Git Write'],
-                \}
+let mapleader=" "      " leader is space
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " jk is escape
 inoremap jk <esc>
- 
+
+" use tab to switch window
+map <Tab> <C-W>w
+
+" By default timeoutlen is 1000 ms
+set timeoutlen=500 
+" Define prefix dictionary
+let g:which_key_map =  {}
+
+let g:which_key_map.f = {
+        \ 'name' : '+files'         ,
+        \ 'f' : ['CtrlP'            , 'open-file']       ,
+        \ 't' : ['NERDTreeToggle'   , 'toggle-filetree'] ,
+        \ }
+
+" == Fugitive =============================================================
+let g:which_key_map.g = {
+      \ 'name' : '+git/version-control' ,
+      \ 'b' : ['Gblame'                 , 'fugitive-blame']             ,
+      \ 'c' : ['BCommits'               , 'commits-for-current-buffer'] ,
+      \ 'C' : ['Gcommit'                , 'fugitive-commit']            ,
+      \ 'd' : ['Gdiff'                  , 'fugitive-diff']              ,
+      \ 'e' : ['Gedit'                  , 'fugitive-edit']              ,
+      \ 'l' : ['Glog'                   , 'fugitive-log']               ,
+      \ 'r' : ['Gread'                  , 'fugitive-read']              ,
+      \ 's' : ['Gstatus'                , 'fugitive-status']            ,
+      \ 'w' : ['Gwrite'                 , 'fugitive-write']             ,
+      \ 'p' : ['Git push'               , 'fugitive-push']              ,
+      \ 'y' : ['Goyo'                   , 'goyo-mode']                  ,
+      \ }
+
+" == Window ==============================================================
+let g:which_key_map.w = {
+      \ 'name' : '+windows' ,
+      \ 'w' : ['<C-W>w'     , 'other-window']          ,
+      \ 'd' : ['<C-W>c'     , 'delete-window']         ,
+      \ '-' : ['<C-W>s'     , 'split-window-below']    ,
+      \ '|' : ['<C-W>v'     , 'split-window-right']    ,
+      \ '2' : ['<C-W>v'     , 'layout-double-columns'] ,
+      \ 'h' : ['<C-W>h'     , 'window-left']           ,
+      \ 'j' : ['<C-W>j'     , 'window-below']          ,
+      \ 'l' : ['<C-W>l'     , 'window-right']          ,
+      \ 'k' : ['<C-W>k'     , 'window-up']             ,
+      \ 'H' : ['<C-W>5<'    , 'expand-window-left']    ,
+      \ 'J' : ['resize +5'  , 'expand-window-below']   ,
+      \ 'L' : ['<C-W>5>'    , 'expand-window-right']   ,
+      \ 'K' : ['resize -5'  , 'expand-window-up']      ,
+      \ '=' : ['<C-W>='     , 'balance-window']        ,
+      \ 's' : ['<C-W>s'     , 'split-window-below']    ,
+      \ 'v' : ['<C-W>v'     , 'split-window-below']    ,
+      \ '?' : ['Windows'    , 'fzf-window']            ,
+      \ }
+
+
+call which_key#register('<Space>', "g:which_key_map")
+
+
 " toggle gundo
-nnoremap <Plug>Toggle-gundo :GundoToggle<CR>
-nmap <leader>u <Plug>Toggle-gundo
-
-nnoremap <Plug>Search :dummy
-nmap <leader>sa :Ag
-
-nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
-vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
-
-map <leader>. <Plug>leaderguide-global
-
-function! s:my_displayfunc()
-        let g:leaderGuide#displayname =
-        \ substitute(g:leaderGuide#displayname, '\c<cr>$', '', '')
-        let g:leaderGuide#displayname = 
-        \ substitute(g:leaderGuide#displayname, '^<Plug>', '', '')
-endfunction
-
-let g:leaderGuide_displayfunc = [function("s:my_displayfunc")]
-let g:leaderGuide_max_size = 0
+nnoremap   <leader>u :GundoToggle<CR>
 

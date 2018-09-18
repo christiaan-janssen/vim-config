@@ -15,7 +15,8 @@ set expandtab       " tabs are spaces
 
 " UI Config ---------------------------------------------------------
 "
-colorscheme tokyo-metro
+colorscheme gruvbox
+set background=dark
 set number	" show line numbers
 set showcmd	" show command in bottom bar
 set cursorline	" highlight current line
@@ -40,7 +41,7 @@ set foldmethod=indent   " fold based on indent level
 " CtrlP -------------------------------------------------------------
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " TMUX --------------------------------------------------------------
