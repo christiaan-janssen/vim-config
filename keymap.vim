@@ -7,6 +7,9 @@ inoremap jk <esc>
 " use tab to switch window
 map <Tab> <C-W>w
 
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
 " By default timeoutlen is 1000 ms
 set timeoutlen=500 
 " Define prefix dictionary
